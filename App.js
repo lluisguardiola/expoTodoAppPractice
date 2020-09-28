@@ -1,21 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+class App extends React.Component {
+
+	state = {
+		todo: "This is our message on screen"
+	}
+	
+	render(){
+		return (
+			<View style={styles.viewStyle}>
+				<Text>Hello world</Text>
+				<TextInput
+					style={styles.inputStyle}
+				/>
+				<Button
+					title="Add to-do"
+					color="green"
+				/>
+				<Text>{this.state.todo}</Text>
+			</View>
+		)
+	}
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const styles = {
+	viewStyle: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	inputStyle: {
+		height: 40,
+		borderColor: 'green',
+		borderWidth: 1
+	}
+}
+
+export default App
