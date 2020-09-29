@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
 import Header from './components/header'
 import TodoItem from './components/todoitem'
 import AddTodo from './components/addtodo'
@@ -28,17 +28,12 @@ export default function App() {
 
 	return (
 		<View style={styles.container}>
-
 			<Header />
-
 			<View style={styles.content}>
-
 				<AddTodo 
 					submitHandler={submitHandler}
 				/>
-
 				<View style={styles.list}>
-
 					<FlatList
 						keyExtractor={todos => todos.key}
 						data={todos}
@@ -49,11 +44,8 @@ export default function App() {
 							/>
 						)}
 					/>
-
 				</View>
-
 			</View>
-
 		</View>
 	)
 }
