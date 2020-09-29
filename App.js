@@ -1,27 +1,38 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 
 export default function App() {
-	const [name, setName] = useState('Lluis')
-	const [age, setAge] = useState('25')
+	const [people, setPeople] = useState([
+		{name: 'Lluis', id: '1'},
+		{name: 'Arvelito', id: '2'},
+		{name: 'Rafinha', id: '3'},
+		{name: 'Luigi', id: '4'},
+		{name: 'Peach', id: '5'},
+		{name: 'Toad', id: '6'},
+		{name: 'Bowser', id: '7'},
+		{name: 'Waluigi', id: '8'}
+	])
+
+	const pressHandler = (id) => {
+		setPeople((prevPeople) => {
+			return prevPeople.filter(person => person.id !== id)
+		})
+	}
 
 	return (
 		<View style={styles.container}>
-			<Text>Enter name: </Text>
-			<TextInput 
-				style={styles.input}
-				placeholder='e.g. John Doe'
-				onChangeText={(value) => setName(value)}
+			<FlatList
+				numColumns={2}
+				keyExtractor={(item) => item.id}
+				data={people}
+				renderItem={({ item }) => (
+					<TouchableOpacity
+						onPress={() => pressHandler(item.id)}
+					>
+						<Text style={styles.item}>{item.name}</Text>
+					</TouchableOpacity>
+				)}
 			/>
-
-			<Text>Enter Age: </Text>
-			<TextInput 
-				style={styles.input}
-				keyboardType='numeric'
-				placeholder='e.g. 22'
-				onChangeText={(value) => setAge(value)}
-			/>
-			<Text>name: {name}, age: {age}</Text>
 		</View>
 	)
 }
@@ -30,14 +41,17 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center'
+		paddingTop: 40,
+		paddingHorizontal: 20
+		// alignItems: 'center',
+		// justifyContent: 'center'
 	},
-	input: {
-		borderWidth: 1,
-		borderColor: '#777',
-		padding: 8,
-		margin: 10,
-		width: 200
+	item: {
+		marginTop: 24,
+		padding: 30,
+		backgroundColor: 'pink',
+		fontSize: 24,
+		marginHorizontal: 10,
+		marginTop: 24
 	}
 })
