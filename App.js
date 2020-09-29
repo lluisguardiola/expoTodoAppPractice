@@ -12,7 +12,8 @@ class App extends React.Component {
 			<View style={styles.viewStyle}>
 				<Text>Hello world</Text>
 				<TextInput
-					style={styles.inputStyle}
+          style={styles.inputStyle}
+          onChangeText={(text) => this.setState({todo: text})}
 				/>
 				<Button
 					title="Add to-do"
@@ -31,6 +32,7 @@ const styles = {
 		justifyContent: 'center'
 	},
 	inputStyle: {
+    width: '100%',
 		height: 40,
 		borderColor: 'green',
 		borderWidth: 1
