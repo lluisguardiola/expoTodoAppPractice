@@ -1,56 +1,43 @@
-import React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
 
-class App extends React.Component {
+export default function App() {
+	const [name, setName] = useState('Lluis')
+	const [age, setAge] = useState('25')
 
-	state = {
-    text: "",
-    toDos: ["Get groceries", "Learn React Native"]
-  }
-  
-  addTodo = () => {
-    this.setState({
-      text: "",
-      toDos: [...this.state.toDos, this.state.text]
-    })
-  }
+	return (
+		<View style={styles.container}>
+			<Text>Enter name: </Text>
+			<TextInput 
+				style={styles.input}
+				placeholder='e.g. John Doe'
+				onChangeText={(value) => setName(value)}
+			/>
 
-  renderTodos = () => {
-    return this.state.toDos.map(todo => <Text key={todo}>{todo}</Text>)
-  }
-	
-	render(){
-		return (
-			<View style={styles.viewStyle}>
-				<Text>Hello world</Text>
-				<TextInput
-          style={styles.inputStyle}
-          onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
-				/>
-				<Button
-					title="Add to-do"
-          color="green"
-          onPress={this.addTodo}
-				/>
-				{this.renderTodos()}
-			</View>
-		)
-	}
+			<Text>Enter Age: </Text>
+			<TextInput 
+				style={styles.input}
+				keyboardType='numeric'
+				placeholder='e.g. 22'
+				onChangeText={(value) => setAge(value)}
+			/>
+			<Text>name: {name}, age: {age}</Text>
+		</View>
+	)
 }
 
-const styles = {
-	viewStyle: {
+const styles = StyleSheet.create({
+	container: {
 		flex: 1,
+		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
-	inputStyle: {
-    width: '100%',
-		height: 40,
-		borderColor: 'green',
-		borderWidth: 1
+	input: {
+		borderWidth: 1,
+		borderColor: '#777',
+		padding: 8,
+		margin: 10,
+		width: 200
 	}
-}
-
-export default App
+})
